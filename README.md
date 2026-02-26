@@ -171,6 +171,18 @@ It highlights Snowflake's ability to integrate analytics and AI within a unified
 
 ---
 
+## 📊 Data Loaded into Snowflake
+
+<p align="center"> <img src="screenshots/ctr_data_table.png" width="700"> </p>
+
+## 🧠 Snowpark Model Training & Evaluation
+
+<p align="center"> <img src="screenshots/worksheet_execution.png" width="700"> </p>
+
+## 📈 Predictions Stored in Snowflake
+
+<p align="center"> <img src="screenshots/worksheet_execution.png" width="700"> </p>
+
 ## 👨‍💻 Author
 
 **Rahul Mandal**  

@@ -5,17 +5,17 @@ from sklearn.metrics import roc_auc_score, classification_report
 from xgboost import XGBClassifier
 import matplotlib.pyplot as plt
 
-# --------------------------------------------------
-# 1️⃣ Load Dataset
-# --------------------------------------------------
+
+#  Load Dataset
+
 df = pd.read_csv("combine5.csv")
 
 print("Dataset Shape:", df.shape)
 print("Click Rate:", df["clicked"].mean())
 
-# --------------------------------------------------
-# 2️⃣ Feature / Target Split
-# --------------------------------------------------
+
+#  Feature / Target Split
+
 X = df.drop("clicked", axis=1)
 y = df["clicked"]
 
@@ -25,9 +25,9 @@ X = pd.get_dummies(
     columns=["user_location", "device_type", "ad_category", "time_of_day"]
 )
 
-# --------------------------------------------------
-# 3️⃣ Train-Test Split
-# --------------------------------------------------
+
+#  Train-Test Split
+
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
@@ -36,9 +36,9 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify=y
 )
 
-# --------------------------------------------------
-# 4️⃣ Handle Class Imbalance
-# --------------------------------------------------
+
+#  Handle Class Imbalance
+
 neg = (y_train == 0).sum()
 pos = (y_train == 1).sum()
 
@@ -46,9 +46,8 @@ scale_pos_weight = neg / pos
 
 print("Scale Pos Weight:", scale_pos_weight)
 
-# --------------------------------------------------
-# 5️⃣ Train XGBoost
-# --------------------------------------------------
+
+#  Train XGBoost
 model = XGBClassifier(
     n_estimators=400,
     max_depth=4,
@@ -63,9 +62,9 @@ model = XGBClassifier(
 
 model.fit(X_train, y_train)
 
-# --------------------------------------------------
-# 6️⃣ Evaluate Model
-# --------------------------------------------------
+
+#  Evaluate Model
+
 y_prob = model.predict_proba(X_test)[:, 1]
 y_pred = model.predict(X_test)
 
@@ -76,9 +75,9 @@ print("AUC:", auc)
 print("\nClassification Report:\n")
 print(classification_report(y_test, y_pred))
 
-# --------------------------------------------------
-# 7️⃣ Feature Importance
-# --------------------------------------------------
+
+# Feature Importance
+
 importances = pd.Series(model.feature_importances_, index=X.columns)
 importances = importances.sort_values(ascending=False)
 

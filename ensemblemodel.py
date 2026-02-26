@@ -6,17 +6,17 @@ from sklearn.metrics import roc_auc_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 
-# --------------------------------------------------
-# 1️⃣ Load Data
-# --------------------------------------------------
+
+# Load Data
+
 df = pd.read_csv("combine5.csv")
 
 print("Dataset Shape:", df.shape)
 print("Click Rate:", df["clicked"].mean())
 
-# --------------------------------------------------
-# 2️⃣ Feature / Target Split
-# --------------------------------------------------
+
+#  Feature / Target Split
+
 X = df.drop("clicked", axis=1)
 y = df["clicked"]
 
@@ -33,9 +33,9 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify=y
 )
 
-# --------------------------------------------------
-# 3️⃣ Define Models
-# --------------------------------------------------
+
+#  Define Models
+
 models = {
     "Logistic Regression": LogisticRegression(
         max_iter=1000,
@@ -53,9 +53,9 @@ models = {
     )
 }
 
-# --------------------------------------------------
-# 4️⃣ Train & Evaluate
-# --------------------------------------------------
+
+#  Train & Evaluate
+
 results = {}
 
 for name, model in models.items():

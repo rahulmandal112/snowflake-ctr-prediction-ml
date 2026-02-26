@@ -5,31 +5,31 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score, classification_report
 import matplotlib.pyplot as plt
 
-# --------------------------------------------------
-# 1️⃣ Load Dataset (Generated via Mockaroo)
-# --------------------------------------------------
+
+# Load Dataset (Generated via Mockaroo)
+
 df = pd.read_csv("combine5.csv")
 
 print("Dataset Shape:", df.shape)
 print("Click Rate:", df["clicked"].mean())
 
-# --------------------------------------------------
-# 2️⃣ Feature / Target Split
-# --------------------------------------------------
+
+# Feature / Target Split
+
 X = df.drop("clicked", axis=1)
 y = df["clicked"]
 
-# --------------------------------------------------
-# 3️⃣ One-Hot Encode Categorical Columns
-# --------------------------------------------------
+
+# One-Hot Encode Categorical Columns
+
 X = pd.get_dummies(
     X,
     columns=["user_location", "device_type", "ad_category", "time_of_day"]
 )
 
-# --------------------------------------------------
-# 4️⃣ Train-Test Split
-# --------------------------------------------------
+
+#  Train-Test Split
+
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
@@ -38,9 +38,9 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify=y  # important for imbalanced data
 )
 
-# --------------------------------------------------
-# 5️⃣ Train Logistic Regression Model
-# --------------------------------------------------
+
+# Train Logistic Regression Model
+
 model = LogisticRegression(
     max_iter=1000,
     class_weight="balanced",
@@ -49,9 +49,9 @@ model = LogisticRegression(
 
 model.fit(X_train, y_train)
 
-# --------------------------------------------------
-# 6️⃣ Evaluate Model
-# --------------------------------------------------
+
+# Evaluate Model
+
 y_prob = model.predict_proba(X_test)[:, 1]
 y_pred = model.predict(X_test)
 
@@ -62,9 +62,9 @@ print("AUC:", auc)
 print("\nClassification Report:\n")
 print(classification_report(y_test, y_pred))
 
-# --------------------------------------------------
-# 7️⃣ Feature Importance
-# --------------------------------------------------
+
+#  Feature Importance
+
 importance = pd.Series(model.coef_[0], index=X.columns)
 importance = importance.sort_values(ascending=False)
 
