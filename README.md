@@ -181,7 +181,7 @@ It highlights Snowflake's ability to integrate analytics and AI within a unified
 
 ## 📈 Predictions Stored in Snowflake
 
-<p align="center"> <img src="screenshots/worksheet_execution.png" width="700"> </p>
+<p align="center"> <img src="screenshots/ctr_predictions_table.png" width="700"> </p>
 
 ## 👨‍💻 Author
 
